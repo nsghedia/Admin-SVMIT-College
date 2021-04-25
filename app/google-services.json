@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "427550069949",
+    "firebase_url": "https://admin-svmit-college-default-rtdb.firebaseio.com",
+    "project_id": "admin-svmit-college",
+    "storage_bucket": "admin-svmit-college.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:427550069949:android:31db788690a431e38793d4",
+        "android_client_info": {
+          "package_name": "com.builddream.admin_svmit_college"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "427550069949-6u5olmi20gphv82pn26gessvklouh53m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6TMgzITuDg_Uwq_AQ3pqkRkGgI60t1Pw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "427550069949-6u5olmi20gphv82pn26gessvklouh53m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
