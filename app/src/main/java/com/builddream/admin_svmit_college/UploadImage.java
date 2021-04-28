@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -75,7 +76,6 @@ public class UploadImage extends AppCompatActivity {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -89,14 +89,11 @@ public class UploadImage extends AppCompatActivity {
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (category.s) {
-//                    noticeTitle.setError("Empty");
-//                    noticeTitle.requestFocus();
-//                } else if (bitmap == null) {
-//                    uploadData();
-//                } else {
-//                    uploadImage();
-//                }
+                if (bitmap == null) {
+                    uploadData();
+                } else {
+                    uploadImage();
+                }
             }
         });
     }
@@ -121,7 +118,7 @@ public class UploadImage extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     DownloadUrl = String.valueOf(uri);
-//                                    uploadData();
+                                    uploadData();
                                 }
                             });
                         }
@@ -134,6 +131,35 @@ public class UploadImage extends AppCompatActivity {
         });
     }
 
+    private void uploadData() {
+        reference = reference.child("Notice");
+        final String uniqueKey = reference.push().getKey();
+
+        String Title = imageCategory.getSelectedItem().toString();
+
+        Calendar calforDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MM-yyyy");
+        String Date = currentDate.format(calforDate.getTime());
+
+        Calendar calforTime = Calendar.getInstance();
+        SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
+        String Time = currentTime.format(calforTime.getTime());
+
+        NoticeData noticeData = new NoticeData(Title, DownloadUrl, Date, Time, uniqueKey);
+        reference.child(uniqueKey).setValue(noticeData).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(UploadImage.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
+                pd.dismiss();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                pd.dismiss();
+                Toast.makeText(UploadImage.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
     private void openGallery() {
